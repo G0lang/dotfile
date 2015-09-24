@@ -48,5 +48,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__',
 " custom vim config {{{
 let g:gitgutter_max_signs = 1000
 syntax on
+let g:pymode_doc = 0
 
 "}}}
