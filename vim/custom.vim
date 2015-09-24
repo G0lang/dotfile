@@ -1,3 +1,5 @@
+" close nerdtree with vim {{{
+
 function! NERDTreeQuit()
   redir => buffersoutput
   silent buffers
@@ -25,19 +27,15 @@ autocmd WinEnter * call NERDTreeQuit()
 nnoremap <silent><Leader>0 :NERDTreeCWD<CR>
 nnoremap <silent><Leader>9 :TlistToggle<CR> 
 
-" taglist  
+"}}}
+" install plugin  {{{
+
 call neobundle#append()
 NeoBundle 'taglist.vim'
 NeoBundle 'tslime.vim'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'vimirc.vim'
 call neobundle#end()
-
-let g:gitgutter_max_signs = 1000
-
-syntax on
-
-
+"}}}
 " NERDTree Better file browser {{{
 
 let NERDTreeWinPos = 'Right'
@@ -47,3 +45,9 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__',
       \ '\.egg-info$', 'node_modules', '\.git$', '\.sass-cache']
       
 " }}}
+" custom vim config {{{
+let g:gitgutter_max_signs = 1000
+syntax on
+
+
+"}}}
