@@ -49,5 +49,4 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__',
 let g:gitgutter_max_signs = 1000
 syntax on
 
-
 "}}}

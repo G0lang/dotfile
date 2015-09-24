@@ -455,10 +455,10 @@ nmap <silent><Leader>ew :call ToggleWrap()<CR>
 "nnoremap <down> <nop>
 "nnoremap <left> <nop>
 "nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
 
 " }}}
 
