@@ -34,6 +34,8 @@ call neobundle#append()
 NeoBundle 'taglist.vim'
 NeoBundle 'tslime.vim'
 NeoBundle 'scrooloose/nerdtree'
+"python auto completion
+NeoBundle 'davidhalter/jedi-vim'
 call neobundle#end()
 "}}}
 " NERDTree Better file browser {{{
@@ -48,6 +50,8 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '__pycache__',
 " custom vim config {{{
 let g:gitgutter_max_signs = 1000
 syntax on
-let g:pymode_doc = 0
 
+let g:jedi#auto_initialization = 1
+
+autocmd FileType python setlocal completeopt-=preview
 "}}}
