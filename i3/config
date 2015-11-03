@@ -27,7 +27,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termit
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -150,7 +150,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command i3status
-        status_command py3status -c ~/.i3/i3status-top.conf
+        status_command py3status -c ~/.config/i3/i3status-top.conf
         font pango:DejaVu Sans Mono, Icons 8
         position top
         mode dock
@@ -161,7 +161,7 @@ bar {
 #        status_command /home/sadegh/dotfile/i3wm/keyboard.sh
     }
 bar {
-        status_command py3status -c ~/.i3/i3status-down.conf
+        status_command py3status -c ~/.config/i3/i3status-down.conf
         font pango:DejaVu Sans Mono, Icons 8
         position bottom
         colors {
@@ -169,29 +169,40 @@ bar {
         background #333333
         }
     } 
-# start a chromium                                                  
+# start a firefox                                                  
 bindsym $mod+c exec google-chrome
 # start a ranger
 bindsym $mod+x exec ranger
 
 #autostart
 #exec nm-applet
-exec  i3-msg 'workspace 1; exec i3-sensible-terminal'
+#exec  i3-msg 'workspace 1; exec i3-sensible-terminal'
 #exec  i3-msg 'workspace 5; exec i3-sensible-terminal -e ranger'
 #exec  i3-msg 'workspace 4; exec i3-sensible-terminal -e vim'
 #exec  i3-msg 'workspace 2; exec chromium'
 #exec  i3-msg 'workspace 3; exec pidgin'
 #background image
-exec feh --no-xinerama --bg-scale /home/sadegh/desktop.png
+#exec feh --no-xinerama --bg-scale /home/sadegh/desktop.png
 #keyboad layout
 #bindsym $mod+u exec setxkbmap us
 #bindsym $mod+i exec setxkbmap ir
 #exec gnome-settings-daemon
-bindsym $mod+n exec nautilus
-
-exec setxkbmap -option grp:switch,grp:shifts_toggle,grp_led:scroll us,ir
-#exec setxkbmap -option caps:escape
+#bindsym $mod+n exec nautilus
 
 
 
+#screen brightness 
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+
+
+#kebyboard LED  brightness 
+bindsym XF86KbdBrightnessDown exec "~/.config/i3/script/leds_down.sh"
+bindsym XF86KbdBrightnessUp exec "~/.config/i3/script/leds_up.sh"
+
+#volume adjustment
+set $sink alsa_output.pci-0000_00_1b.0.analog-stereo
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-mute $sink 0; pactl set-sink-volume $sink +2% "
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-mute $sink 0; pactl set-sink-volume $sink -2% "
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $sink toggle "
 
