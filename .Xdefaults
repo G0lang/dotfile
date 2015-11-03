@@ -1,0 +1,55 @@
+URxvt.foreground: white
+ 
+URxvt*iso14755: False
+ 
+URxvt.depth: 32
+URxvt*background: rgba:0000/0000/0000/cccc
+URxvt.loginShell: true
+URxvt.perl-lib: /usr/lib/urxvt/perl
+URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs: true
+URxvt.perl-ext: selection
+URxvt.perl-ext-common:  default,matcher
+URxvt.matcher.button:   1
+URxvt.urlLauncher: /usr/bin/firefox-ux
+URxvt.underlineColor: green
+URxvt.saveLines: 65535
+URxvt.scrollBar: false
+URxvt.visualBell: true
+ 
+URxvt*background:        #333333
+URxvt*foreground:        #cccccc
+URxvt*cursorColor:       #999999
+URxvt*colorBD:           #ffffff
+URxvt*colorUL:           #ffff99
+ 
+!BLK
+URxvt*color0:           #666666
+URxvt*color8:           #999999
+!RED
+URxvt*color1:          #CC6699
+URxvt*color9:           #FF99CC
+!GRN
+URxvt*color2:           #99CC66
+URxvt*color10:         #CCFF99
+!YEL
+URxvt*color3:          #CC9966
+URxvt*color11:         #FFCC99
+!BLU
+URxvt*color4:          #6699CC
+URxvt*color12:         #99CCFF
+!MAG
+URxvt*color5:           #9966CC
+URxvt*color13:          #CC99FF
+!CYN
+URxvt*color6:          #66CC99
+URxvt*color14:         #99FFCC
+!WHT
+URxvt*color7:          #CCCCCC
+URxvt*color15:         #FFFFFF
+ 
+!URxvt*font:     -ypn-envypn-medium-r-normal--13-130-75-75-c-90-iso8859-1
+!URxvt*boldFont:     -ypn-envypn-medium-r-normal--13-130-75-75-c-90-iso8859-1
+
+
+urxvt*font: xft:DejaVu Sans Mono:size=12
