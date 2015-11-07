@@ -35,7 +35,8 @@ NeoBundle 'taglist.vim'
 NeoBundle 'tslime.vim'
 NeoBundle 'scrooloose/nerdtree'
 "python auto completion
-NeoBundle 'davidhalter/jedi-vim'
+"NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'Valloric/YouCompleteMe' 
 call neobundle#end()
 "}}}
 " NERDTree Better file browser {{{
