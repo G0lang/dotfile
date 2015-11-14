@@ -34,6 +34,7 @@ call neobundle#append()
 NeoBundle 'taglist.vim'
 NeoBundle 'tslime.vim'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'digitaltoad/vim-jade'
 "python auto completion
 "NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'Valloric/YouCompleteMe' 
