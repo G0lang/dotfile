@@ -68,7 +68,9 @@ Plug 'neomake/neomake'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'zchee/deoplete-jedi'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jreybert/vimagit'
@@ -76,6 +78,8 @@ Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-syntastic/syntastic'
+Plug 'ryanoasis/vim-devicons'
 
 
 " Add plugins to &runtimepath
@@ -117,13 +121,18 @@ endif
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeWinPos = "right"
-autocmd VimEnter * NERDTree
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
+autocmd VimEnter * if argc() == 0 | NERDTree | endif
 let g:NERDTreeWinSize = 25
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Auto close if NERDTree is the last thing open
+autocmd bufenter *
+    \ if (winnr("$") == 1 && exists("b:NERDTree")
+    \ && b:NERDTree.isTabTree()) | q | endif
 
+set laststatus=2
 
 " startup with number
 set number
@@ -134,6 +143,7 @@ let g:airline_theme="badwolf"
 let g:airline_theme='oceanicnext'
 
 " tagbar
+map <C-m> :Tagbar<CR>
 let g:tagbar_left = 1
 let g:tagbar_width = 25
 
@@ -143,3 +153,19 @@ if (has("termguicolors"))
 endif
 syntax enable
 colorscheme OceanicNext
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" fonts and devicons
+set encoding=utf8
+let g:webdevicons_enable = 0
+"let g:webdevicons_enable_nerdtree = 0
+"let g:webdevicons_enable_airline_statusline = 0
