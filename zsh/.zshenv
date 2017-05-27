@@ -6,3 +6,6 @@ export JAVA_HOME=/home/sadegh/Java/jdk1.8.0_101/
 export PATH=$JAVA_HOME/bin:$PATH
 export ANDROID_HOME=/home/sadegh/Android/Sdk    
             
+# golang
+export GOPATH=$HOME/Code/go
+PATH=$PATH:$GOPATH/bin

@@ -2,3 +2,5 @@
 
 nvim/repos
 nvim/.cache
+nvim/cache_editor
+nvim/state_editor.vim
