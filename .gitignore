@@ -1,0 +1,4 @@
+*.pyc
+
+nvim/repos
+nvim/.cache
