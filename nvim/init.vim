@@ -21,6 +21,8 @@ let g:deoplete#keyword_patterns['default'] = '\h\w*'
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+
 
 " neomake
 autocmd BufWritePost * Neomake
@@ -52,6 +54,16 @@ let g:neomake_go_gometalinter_maker = {
   \   '%W%f:%l::%tarning: %m'
   \ }
 
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
+    \ 'errorformat':
+        \ '%E%f:%l: could not compile,%-Z%p^,' .
+        \ '%A%f:%l:%c: %t%n %m,' .
+        \ '%A%f:%l: %t%n %m,' .
+        \ '%-G%.%#',
+    \ }
+let g:neomake_python_enabled_makers = ['flake8']
+
 " vim-go
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = 'goimports'
@@ -60,6 +72,7 @@ let g:go_term_enabled = 1
 
 " use real tabs in .go files, not spaces
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType py setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
 " plugins
 call plug#begin()
@@ -78,7 +91,6 @@ Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-syntastic/syntastic'
 Plug 'ryanoasis/vim-devicons'
 
 
@@ -139,7 +151,6 @@ set number
 
 " Aireline theme
 let g:airline_powerline_fonts = 1
-let g:airline_theme="badwolf"
 let g:airline_theme='oceanicnext'
 
 " tagbar
@@ -148,9 +159,6 @@ let g:tagbar_left = 1
 let g:tagbar_width = 25
 
 " theme
-if (has("termguicolors"))
- set termguicolors
-endif
 syntax enable
 colorscheme OceanicNext
 

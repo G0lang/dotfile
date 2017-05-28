@@ -96,12 +96,12 @@ mode "resize" {
 bindsym $mod+r mode "resize"            
 
 # switch to workspace
-bindsym $mod+1 workspace 1: web
-bindsym $mod+F1 workspace 1: web
-bindsym $mod+2 workspace 2: vim
-bindsym $mod1+F2 workspace 2: vim
-bindsym $mod+3 workspace 3: terms
-bindsym $mod+F3 workspace 3: terms
+bindsym $mod+1 workspace 1: term
+bindsym $mod+F1 workspace 1: term
+bindsym $mod+2 workspace 2: web
+bindsym $mod1+F2 workspace 2: web
+bindsym $mod+3 workspace 3: vim
+bindsym $mod+F3 workspace 3: vim
 bindsym $mod+4 workspace 4: files
 bindsym $mod+F4 workspace 4: files
 bindsym $mod+5 workspace 5: top
@@ -118,12 +118,12 @@ bindsym $mod+0 workspace 10: virtual
 bindsym $mod+F10 workspace 10: virtual
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam      move container to workspace 1: web
-bindsym $mod+Shift+F1          move container to workspace 1: web
-bindsym $mod+Shift+at          move container to workspace 2: vim
-bindsym $mod+Shift+F2          move container to workspace 2: vim
-bindsym $mod+Shift+numbersign  move container to workspace 3: terms
-bindsym $mod+Shift+F3          move container to workspace 3: terms
+bindsym $mod+Shift+exclam      move container to workspace 1: term
+bindsym $mod+Shift+F1          move container to workspace 1: term
+bindsym $mod+Shift+at          move container to workspace 2: web
+bindsym $mod+Shift+F2          move container to workspace 2: web
+bindsym $mod+Shift+numbersign  move container to workspace 3: vim
+bindsym $mod+Shift+F3          move container to workspace 3: vim
 bindsym $mod+Shift+dollar      move container to workspace 4: files
 bindsym $mod+Shift+F4          move container to workspace 4: files
 bindsym $mod+Shift+percent     move container to workspace 5: top
@@ -228,10 +228,10 @@ mode "Mount" {
 # start urxvt as a daemon
 # exec urxvtd -q -o -f
 
-exec i3-msg 'workspace 4: files; exec urxvt -e ranger'
-exec i3-msg 'workspace 3: terms; exec urxvt'
-exec i3-msg 'workspace 2: vim; exec urxvt -e vim'
-exec i3-msg 'workspace 1: web; exec google-chrome'
+# exec i3-msg 'workspace 4: files; exec urxvt -e ranger'
+# exec i3-msg 'workspace 3: terms; exec urxvt'
+# exec i3-msg 'workspace 2: vim; exec urxvt -e vim'
+# exec i3-msg 'workspace 1: web; exec google-chrome'
 
 #background image
 exec --no-startup-id feh --no-xinerama --bg-scale /home/sadegh/dotfile/background/bg.jpg
