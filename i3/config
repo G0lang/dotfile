@@ -12,7 +12,11 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
+
+# Rofi
+bindsym $mod+d exec --no-startup-id rofi -show run -matching glob -separator-style "none" -font "Ubuntu Mono Regular 8" -hide-scrollbar -lines 10 -auto-select -bw 1 -width 40 
+
 
 # change focus
 bindsym $mod+j focus left
@@ -95,50 +99,41 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"            
 
+# added workspace 
+set $workspace1 "1."
+set $workspace2 "2."
+set $workspace3 "3."
+set $workspace4 "4."
+set $workspace5 "5."
+set $workspace6 "6."
+set $workspace7 "7."
+set $workspace8 "8."
+set $workspace9 "9."
+set $workspace0 "10."
+
 # switch to workspace
-bindsym $mod+1 workspace 1: term
-bindsym $mod+F1 workspace 1: term
-bindsym $mod+2 workspace 2: web
-bindsym $mod1+F2 workspace 2: web
-bindsym $mod+3 workspace 3: vim
-bindsym $mod+F3 workspace 3: vim
-bindsym $mod+4 workspace 4: files
-bindsym $mod+F4 workspace 4: files
-bindsym $mod+5 workspace 5: top
-bindsym $mod+F5 workspace 5: top
-bindsym $mod+6 workspace 6: diff
-bindsym $mod+F6 workspace 6: diff
-bindsym $mod+7 workspace 7: media
-bindsym $mod+F7 workspace 7: media
-bindsym $mod+8 workspace 8: office
-bindsym $mod+F8 workspace 8: office
-bindsym $mod+9 workspace 9: graphics
-bindsym $mod+F9 workspace 9: graphics
-bindsym $mod+0 workspace 10: virtual
-bindsym $mod+F10 workspace 10: virtual
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace0
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam      move container to workspace 1: term
-bindsym $mod+Shift+F1          move container to workspace 1: term
-bindsym $mod+Shift+at          move container to workspace 2: web
-bindsym $mod+Shift+F2          move container to workspace 2: web
-bindsym $mod+Shift+numbersign  move container to workspace 3: vim
-bindsym $mod+Shift+F3          move container to workspace 3: vim
-bindsym $mod+Shift+dollar      move container to workspace 4: files
-bindsym $mod+Shift+F4          move container to workspace 4: files
-bindsym $mod+Shift+percent     move container to workspace 5: top
-bindsym $mod+Shift+F5          move container to workspace 5: top
-bindsym $mod+Shift+asciicircum move container to workspace 6: diff
-bindsym $mod+Shift+F6          move container to workspace 6: diff
-bindsym $mod+Shift+ampersand   move container to workspace 7: media
-bindsym $mod+Shift+F7          move container to workspace 7: media
-bindsym $mod+Shift+asterisk    move container to workspace 8: office
-bindsym $mod+Shift+F8          move container to workspace 8: office
-bindsym $mod+Shift+parenleft   move container to workspace 9: graphics
-bindsym $mod+Shift+F9          move container to workspace 9: graphics
-bindsym $mod+Shift+parenright  move container to workspace 10: virtual
-bindsym $mod+Shift+F10         move container to workspace 10: virtual
-
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace0
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -149,7 +144,7 @@ bar {
         position top
         status_command py3status -i ~/.config/i3/py3status -c ~/.config/i3/py3status/config
         colors {
-            background #101010
+            	background #101010
                 statusline #999999
                 urgent_workspace #2e3436 #9a878f
         }
@@ -158,65 +153,48 @@ bar {
 ##
 # system
 ##
-# set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-bindsym $mod+Shift+E mode "System"
-mode "System" {
+set $System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$System" {
         bindsym l exec ~/.config/i3/script/i3exit.sh lock, mode "default"
         bindsym e exec ~/.config/i3/script/i3exit.sh logout, mode "default"
-        #bindsym s exec ~/.config/i3/script/i3exit.sh suspend, mode "default"
-        #bindsym h exec ~/.config/i3/script/i3exit.sh hibernate, mode "default"
+        bindsym s exec ~/.config/i3/script/i3exit.sh suspend, mode "default"
+        bindsym h exec ~/.config/i3/script/i3exit.sh hibernate, mode "default"
         bindsym r exec ~/.config/i3/script/i3exit.sh reboot, mode "default"
         bindsym Shift+Q exec ~/.config/i3/script/i3exit.sh shutdown, mode "default"
 
-# back to normal: Enter or Escape
+	# back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+bindsym $mod+Shift+E mode "$System"
 
-bindsym $mod+Shift+S mode "Services"
-mode "Services" {
-    bindsym a exec ~/.i3/i3service.sh apache_start, mode "default"
+set $Services (a,A) apache, (s,S) mysql, (m,M) mongodb, (v,V) vpn
+mode "$Services" {
+    	bindsym a exec ~/.i3/i3service.sh apache_start, mode "default"
         bindsym Shift+A exec ~/.i3/i3service.sh apache_stop, mode "default"
-
         bindsym s exec ~/.i3/i3service.sh mysql_start, mode "default"
         bindsym Shift+S exec ~/.i3/i3service.sh mysql_stop, mode "default"
-
         bindsym m exec ~/.i3/i3service.sh mongo_start, mode "default"
         bindsym Shift+M exec ~/.i3/i3service.sh mongo_stop, mode "default"
-
         bindsym v exec ~/.i3/i3service.sh vpn_start, mode "default"
         bindsym Shift+V exec ~/.i3/i3service.sh vpn_stop, mode "default"
 
-# back to normal: Enter or Escape
+	# back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+bindsym $mod+Shift+S mode "$Services"
 
-bindsym $mod+Shift+P mode "Projects"
-mode "Projects" {
-    bindsym d exec ~/.i3/i3projects.sh drupal_start, mode "default"
-        bindsym Shift+D exec ~/.i3/i3projects.sh drupal_stop, mode "default"
-
-        bindsym k exec ~/.i3/i3projects.sh ks_start, mode "default"
-        bindsym Shift+K exec ~/.i3/i3projects.sh ks_stop, mode "default"
-
-        bindsym f exec ~/.i3/i3projects.sh file_start, mode "default"
-        bindsym Shift+F exec ~/.i3/i3projects.sh file_stop, mode "default"
-
-# back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+Shift+M mode "Mount"
-mode "Mount" {
-    bindsym m exec ~/.i3/i3mount.sh mount, mode "default"
+set $Mount (m) mount, (u) umount
+mode "$Mount" {
+    	bindsym m exec ~/.i3/i3mount.sh mount, mode "default"
         bindsym u exec ~/.i3/i3mount.sh umount, mode "default"
 
-# back to normal: Enter or Escape
+	# back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+bindsym $mod+Shift+M mode "$Mount"
 
 # Disable Caps Lock
 # xmodmap -e "remove lock = Caps_Lock"
@@ -237,12 +215,12 @@ mode "Mount" {
 exec --no-startup-id feh --no-xinerama --bg-scale /home/sadegh/dotfile/background/bg.jpg
  
 # Screenshot
-bindsym 0xff61 exec scrot  ~/pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
-bindsym $mod+p exec scrot  ~/pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
+bindsym 0xff61 exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
+bindsym $mod+p exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
  
 #screen brightness 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec "~/.config/i3/script/brightness_down.sh"
+bindsym XF86MonBrightnessUp exec "~/.config/i3/script/brightness_up.sh"
 
 
 #kebyboard LED  brightness 
