@@ -1,14 +1,19 @@
 ! █▓▒░ fonts
 urxvt*font: xft:DejaVu Sans Mono for Powerline:regular:size=11
-!urxvt*font: xft:gohufont:size=11:antialias=true
-!urxvt*font: xft:creep:size=16:antialias=true
-!urxvt*font: xft:envy code r:size=9:antialias=false
-!urxvt*font: xft:lemon:size=16:antialias=false
-!urxvt*font: xft:lime:size=16:antialias=false
-!urxvt*font: xft:neep:size=11:antialias=false
-!urxvt*font: xft:perfect dos vga 437:size=11:antialias=false
-!urxvt*font: xft:tewi:size=11:antialias=false
 
+URxvt.depth: 32
+URxvt.loginShell: true
+URxvt.perl-lib: /usr/lib/urxvt/perl
+URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs: true
+URxvt.perl-ext: selection
+URxvt.perl-ext-common:  default,matcher
+URxvt.matcher.button:   1
+URxvt.urlLauncher: /usr/bin/google-chrome
+URxvt.underlineColor: green
+URxvt.scrollBar: false
+URxvt.visualBell: false
+ 
 urxvt*boldFont: 
 urxvt*italicFont: 
 urxvt*bolditalicFont: 

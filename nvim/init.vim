@@ -92,6 +92,7 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'jistr/vim-nerdtree-tabs'
 
 
 " Add plugins to &runtimepath
@@ -132,9 +133,11 @@ else
 endif
 
 " nerdtree
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeTabsToggle<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeMinimalUI = 1
+let NERDTreeIgnore=['\~$', '\.pyc$', '^\.DS_Store$', '^node_modules$', '.git', '.ropeproject', '__pycache__']
 let NERDTreeDirArrows = 1
 let NERDTreeAutoDeleteBuffer = 1
 autocmd VimEnter * if argc() == 0 | NERDTree | endif
@@ -145,6 +148,11 @@ autocmd bufenter *
     \ && b:NERDTree.isTabTree()) | q | endif
 
 set laststatus=2
+
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+" copy to clipboard
+noremap <C-c> "+y
 
 " startup with number
 set number
@@ -169,7 +177,6 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " fonts and devicons
