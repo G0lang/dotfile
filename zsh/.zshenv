@@ -1,11 +1,12 @@
 # java
-export JAVA_HOME=/home/sadegh/Java/jdk1.8.0_101
+export JAVA_HOME=$HOME/Bin/Java/jdk1.8.0_101
 export PATH=$JAVA_HOME/bin:$PATH
-export ANDROID_HOME=/home/sadegh/Android/Sdk    
+export ANDROID_HOME=$HOME/Android/Sdk    
             
 # golang
+export GOROOT=$HOME/Bin/golang/go
 export GOPATH=$HOME/Code/go
-export PATH=$GOPATH/bin:$PATH
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # python virtualenvwrapper
 export WORKON_HOME=$HOME/Code/.envs
