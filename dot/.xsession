@@ -8,7 +8,7 @@ setxkbmap -option ctrl:nocaps
 setxkbmap -option grp:switch,grp:shifts_toggle,grp_led:scroll us,ir
 
 # macbook
-xkbcomp -I/home/sadegh/xkb /home/sadegh/xkb/keymap/macbook78 $DISPLA
+xkbcomp -I /home/sadegh/dotfile/macbook/kbd $DISPLA
 
 # start urxvt as a daemon
 #urxvtd -q -o -f &
