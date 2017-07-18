@@ -66,9 +66,20 @@ let g:neomake_python_enabled_makers = ['flake8']
 
 " vim-go
 let g:go_def_mapping_enabled = 0
+let g:go_snippet_case_type = "camelcase"
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
+let g:go_term_mode = "split"
 let g:go_term_enabled = 1
+" performance !!!
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+
 
 " use real tabs in .go files, not spaces
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
@@ -93,6 +104,11 @@ Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/molokai'
+Plug 'jodosha/vim-godebug'
 
 
 " Add plugins to &runtimepath
@@ -121,8 +137,8 @@ autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
 autocmd FileType go nmap <buffer> <leader>b <plug>(go-build)
 autocmd FileType go nmap <buffer> <leader>t <plug>(go-test)
 autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
-autocmd FileType go nmap <buffer> gd <plug>(go-def-vertical)
-autocmd FileType go nmap <buffer> <c-]> <plug>(go-def-vertical)
+autocmd FileType go nmap <buffer> <leader>c <plug>(go-coverage)
+autocmd FileType go nmap <buffer> gd <plug>(go-def-split)
 autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
 
 " highligh 80 char
@@ -134,7 +150,7 @@ endif
 
 " nerdtree
 " map <C-n> :NERDTreeToggle<CR>
-map <C-n> :NERDTreeTabsToggle<CR>
+nmap <C-n> :NERDTreeTabsToggle<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.pyc$', '^\.DS_Store$', '^node_modules$', '.git', '.ropeproject', '__pycache__']
@@ -162,13 +178,15 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='oceanicnext'
 
 " tagbar
-map <C-m> :Tagbar<CR>
+nmap <C-T> :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_width = 25
 
 " theme
 syntax enable
-colorscheme OceanicNext
+let g:rehash256 = 1
+let g:molokai_original = 1
+colorscheme molokai
 
 " syntastic
 set statusline+=%#warningmsg#
