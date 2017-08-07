@@ -202,3 +202,9 @@ set encoding=utf8
 let g:webdevicons_enable = 0
 "let g:webdevicons_enable_nerdtree = 0
 "let g:webdevicons_enable_airline_statusline = 0
+
+" spell check
+setlocal spell spelllang=en_us
+set nospell
+
+" Translate Bye Google

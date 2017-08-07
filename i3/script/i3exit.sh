@@ -11,7 +11,7 @@ case "$1" in
         sudo pm-suspend | i3lock -c 000000
         ;;
     hibernate)
-        sudo pm-hibernate
+	systemctl hibernate
         ;;
     reboot)
         sudo reboot
