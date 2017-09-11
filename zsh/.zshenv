@@ -5,7 +5,8 @@ export ANDROID_HOME=$HOME/Android/Sdk
             
 # golang
 export GOROOT=$HOME/Bin/golang/go
-export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go # add this for test go build go from source
+# add this for test go build go from source
+# export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
 export GOPATH=$HOME/Code/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
