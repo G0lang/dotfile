@@ -236,12 +236,12 @@ bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $sink toggle "
 # bind software
 bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec urxvt -e tmux
-bindsym $mod+t exec urxvt -e htop
+bindsym $mod+t exec /home/sadegh/Bin/telegram/Telegram/Telegram
 bindsym $mod+x exec urxvt -e ranger
 bindsym $mod+o exec libreoffice
 bindsym $mod+m exec exec urxvt -e vim
 bindsym $mod+i exec iceweasel
 bindsym $mod+c exec google-chrome
+# bindsym $mod+t exec urxvt -e htop
 #bindsym $mod+d exec meld
 #bindsym $mod+f exec filezilla
-  
