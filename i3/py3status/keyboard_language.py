@@ -10,19 +10,19 @@ import re
 
 # colors of layouts, check your command's output to match keys
 LANG = {
-    '00000000': 'en',
-    '00000001': 'en',
-    '00000002': 'en',
-    '00000003': 'en',
-    '00001004': 'fa',
-    '00001005': 'fa',
-    '00001006': 'fa',
-    '00001007': 'fa',
+    '00000000': ' en',
+    '00000001': ' en',
+    '00000002': ' en',
+    '00000003': ' en',
+    '00001004': ' fa',
+    '00001005': ' fa',
+    '00001006': ' fa',
+    '00001007': ' fa',
 }
 
 LANG_COLORS = {
-    'en': '#729FCF',  # light blue
-    'fa': '#FCE94F',  # yellow
+    ' en': '#729FCF',  # light blue
+    ' fa': '#FCE94F',  # yellow
 }
 
 LANG_RE = re.compile(r".*LED mask:\s*(\w+).*", flags=re.DOTALL)

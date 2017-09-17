@@ -4,10 +4,10 @@ export PATH=$JAVA_HOME/bin:$PATH
 export ANDROID_HOME=$HOME/Android/Sdk    
             
 # golang
-export GOROOT=$HOME/Bin/golang/go
+export GOROOT=$HOME/Code/GO/ROOT/
 # add this for test go build go from source
-# export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
-export GOPATH=$HOME/Code/go
+export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
+export GOPATH=$HOME/Code/GO/PATH/
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # python virtualenvwrapper
