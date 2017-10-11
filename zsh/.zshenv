@@ -4,7 +4,10 @@ export PATH=$JAVA_HOME/bin:$PATH
 export ANDROID_HOME=$HOME/Android/Sdk    
             
 # golang
-export GOROOT=$HOME/Code/GO/ROOT/
+# work on go project 
+# export GOROOT=$HOME/Code/GO/ROOT/
+# stable version of go 
+export GOROOT=$HOME/Bin/golang/go
 # add this for test go build go from source
 export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
 export GOPATH=$HOME/Code/GO/PATH/
