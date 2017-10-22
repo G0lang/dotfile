@@ -18,4 +18,10 @@ export WORKON_HOME=$HOME/Code/.envs
 export PROJECT_HOME=$HOME/Code/python/
 source /usr/local/bin/virtualenvwrapper.sh
 
+
+# History config
+export HISTCONTROL=erasedups
+export HISTIGNORE="history*:ls*"
+export HISTTIMEFORMAT="%h %d %H:%M:%S >> "
+
 # export PATH="/home/sadegh/bin:/usr/local/bin:/home/xero/.gem/ruby/2.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"

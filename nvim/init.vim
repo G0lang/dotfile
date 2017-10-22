@@ -1,10 +1,10 @@
 " First install vim-plug:
-" curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" /home/sadegh/.config/nvim/init.vim
+" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "
-" Note: Skip initialization for vim-tiny or vim-small.
+" Note Skip initialization for vim-tiny or vim-small.
 if 0 | endif
-
 if &compatible
   set nocompatible
 endif
@@ -101,8 +101,7 @@ Plug 'jreybert/vimagit'
 Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
-Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'airblade/vim-gitgutter'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -112,7 +111,9 @@ Plug 'jodosha/vim-godebug'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-
+Plug 'pseewald/vim-anyfold'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ihacklog/HiCursorWords'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -152,19 +153,18 @@ else
 endif
 
 " nerdtree
-" map <C-n> :NERDTreeToggle<CR>
 nmap <C-n> :NERDTreeTabsToggle<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.pyc$', '^\.DS_Store$', '^node_modules$', '.ropeproject', '__pycache__']
 let NERDTreeDirArrows = 1
 let NERDTreeAutoDeleteBuffer = 1
-autocmd VimEnter * if argc() == 0 | NERDTree | endif
 let g:NERDTreeWinSize = 25
+autocmd VimEnter * if argc() == 0 | NERDTree | endif
 " Auto close if NERDTree is the last thing open
 autocmd bufenter *
-    \ if (winnr("$") == 1 && exists("b:NERDTree")
-    \ && b:NERDTree.isTabTree()) | q | endif
+   \ if (winnr("$") == 1 && exists("b:NERDTree")
+   \ && b:NERDTree.isTabTree()) | q | endif
 
 set laststatus=2
 
@@ -172,9 +172,23 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 
 " copy to clipboard
 noremap <C-c> "+y
+let g:loaded_matchparen = 1
 
 " startup with number
 set number
+
+" cursor word
+let g:HiCursorWords_delay = 900
+
+" fold
+filetype plugin indent on
+let anyfold_fold_comments=1
+syntax on
+let anyfold_activate=1
+set foldlevel=0
+
+" gitgutter
+  let g:gitgutter_map_keys = 0
 
 " Aireline theme
 let g:airline_powerline_fonts = 1
@@ -190,15 +204,6 @@ syntax enable
 let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
 
 " fonts and devicons
 set encoding=utf8
@@ -227,3 +232,4 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
