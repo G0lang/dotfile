@@ -222,13 +222,13 @@ bindsym 0xff61 exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym $mod+p exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
  
 #screen brightness 
-bindsym XF86MonBrightnessDown exec "~/.config/i3/script/brightness_down.sh"
-bindsym XF86MonBrightnessUp exec "~/.config/i3/script/brightness_up.sh"
+bindsym XF86MonBrightnessDown exec --no-startup-id "~/.config/i3/script/brightness_down.sh"
+bindsym XF86MonBrightnessUp exec --no-startup-id "~/.config/i3/script/brightness_up.sh"
 
 
 #kebyboard LED  brightness 
-bindsym XF86KbdBrightnessDown exec "~/.config/i3/script/leds_down.sh"
-bindsym XF86KbdBrightnessUp exec "~/.config/i3/script/leds_up.sh"
+bindsym XF86KbdBrightnessDown exec --no-startup-id "~/.config/i3/script/leds_down.sh"
+bindsym XF86KbdBrightnessUp exec --no-startup-id "~/.config/i3/script/leds_up.sh"
 
 #volume adjustment
 set $sink alsa_output.pci-0000_00_1b.0.analog-stereo
