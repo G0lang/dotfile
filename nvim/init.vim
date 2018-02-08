@@ -92,6 +92,7 @@ Plug 'neomake/neomake'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'zchee/deoplete-jedi'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -114,6 +115,15 @@ Plug 'tpope/vim-surround'
 Plug 'pseewald/vim-anyfold'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ihacklog/HiCursorWords'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'stephpy/vim-yaml'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'mbbill/undotree'
+Plug 'othree/html5.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'vimlab/split-term.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -151,6 +161,9 @@ if exists('+colorcolumn')
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+" undotree 
+nnoremap <F5> :UndotreeToggle<cr>
 
 " nerdtree
 nmap <C-n> :NERDTreeTabsToggle<CR>
