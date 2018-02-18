@@ -1,8 +1,5 @@
-" First install vim-plug:
 " /home/sadegh/.config/nvim/init.vim
-" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
+
 " Note Skip initialization for vim-tiny or vim-small.
 if 0 | endif
 if &compatible
@@ -11,83 +8,26 @@ endif
 
 let g:mapleader = ","
 
-" deoplete
-set completeopt=longest,menuone " auto complete setting
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#align_class = 1
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-
-
-" neomake
-autocmd BufWritePost * Neomake
-let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
-let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
-let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
-let g:neomake_go_gometalinter_maker = {
-  \ 'args': [
-  \   '--tests',
-  \   '--enable-gc',
-  \   '--concurrency=3',
-  \   '--fast',
-  \   '-D', 'aligncheck',
-  \   '-D', 'dupl',
-  \   '-D', 'gocyclo',
-  \   '-D', 'gotype',
-  \   '-E', 'errcheck',
-  \   '-E', 'misspell',
-  \   '-E', 'unused',
-  \   '%:p:h',
-  \ ],
-  \ 'append_file': 0,
-  \ 'errorformat':
-  \   '%E%f:%l:%c:%trror: %m,' .
-  \   '%W%f:%l:%c:%tarning: %m,' .
-  \   '%E%f:%l::%trror: %m,' .
-  \   '%W%f:%l::%tarning: %m'
-  \ }
-
-let g:neomake_python_flake8_maker = {
-    \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
-    \ 'errorformat':
-        \ '%E%f:%l: could not compile,%-Z%p^,' .
-        \ '%A%f:%l:%c: %t%n %m,' .
-        \ '%A%f:%l: %t%n %m,' .
-        \ '%-G%.%#',
-    \ }
-let g:neomake_python_enabled_makers = ['flake8']
-
-" vim-go
-let g:go_def_mapping_enabled = 0
-let g:go_snippet_case_type = "camelcase"
-let g:go_fmt_command = 'goimports'
-let g:go_fmt_fail_silently = 1
-let g:go_term_mode = "split"
-let g:go_term_enabled = 1
-" performance !!!
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-
+" highligh 80 char
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 " use real tabs in .go files, not spaces
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 autocmd FileType py setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
-" plugins
-call plug#begin()
+" install plug auto 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
+" plugins
+call plug#begin('~/.vim/plugged')
 Plug 'neomake/neomake'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -102,7 +42,7 @@ Plug 'jreybert/vimagit'
 Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -134,18 +74,75 @@ autocmd VimEnter *
   \|   PlugInstall
   \| endif
 
-call deoplete#custom#set('_', 'converters',
-      \ ['converter_auto_paren',
-      \  'converter_auto_delimiter',
-      \  'converter_remove_overlap'])
-
-" mappings
-
 " deoplete
+set completeopt=longest,menuone " auto complete setting
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns['default'] = '\h\w*'
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#align_class = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode' " must install go get -u github.com/nsf/gocode
 imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
 
+" neomake
+autocmd BufWritePost * Neomake
+let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+let g:neomake_go_gometalinter_maker = {
+  \ 'args': [
+  \   '--tests',
+  \   '--enable-gc',
+  \   '--concurrency=3',
+  \   '--fast',
+  \   '-D', 'aligncheck',
+  \   '-D', 'dupl',
+  \   '-D', 'gocyclo',
+  \   '-D', 'gotype',
+  \   '-E', 'errcheck',
+  \   '-E', 'misspell',
+  \   '-E', 'unused',
+  \   '%:p:h',
+  \ ],
+  \ 'append_file': 0,
+  \ 'errorformat':
+  \   '%E%f:%l:%c:%trror: %m,' .
+  \   '%W%f:%l:%c:%tarning: %m,' .
+  \   '%E%f:%l::%trror: %m,' .
+  \   '%W%f:%l::%tarning: %m'
+  \ }
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
+    \ 'errorformat':
+        \ '%E%f:%l: could not compile,%-Z%p^,' .
+        \ '%A%f:%l:%c: %t%n %m,' .
+        \ '%A%f:%l: %t%n %m,' .
+        \ '%-G%.%#',
+    \ }
+let g:neomake_python_enabled_makers = ['flake8']
+
+" vim-go
+let g:go_def_mapping_enabled = 0
+let g:go_snippet_case_type = "camelcase"
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:go_term_mode = "split"
+let g:go_term_enabled = 1
+" performance !!!
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
 " vim-go mappings
 autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
 autocmd FileType go nmap <buffer> <leader>b <plug>(go-build)
@@ -154,13 +151,6 @@ autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
 autocmd FileType go nmap <buffer> <leader>c <plug>(go-coverage)
 autocmd FileType go nmap <buffer> gd <plug>(go-def-split)
 autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
-
-" highligh 80 char
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
 
 " undotree 
 nnoremap <F5> :UndotreeToggle<cr>
@@ -197,11 +187,8 @@ let g:HiCursorWords_delay = 900
 filetype plugin indent on
 let anyfold_fold_comments=1
 syntax on
-let anyfold_activate=1
+let anyfold_activate=0
 set foldlevel=0
-
-" gitgutter
-  let g:gitgutter_map_keys = 0
 
 " Aireline theme
 let g:airline_powerline_fonts = 1
@@ -229,20 +216,20 @@ setlocal spell spelllang=en_us
 set nospell
 
 " Translate Bye Google
-"
 
+" Easymotion
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
-
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
-
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
-
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+" python
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
