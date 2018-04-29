@@ -9,7 +9,7 @@ export GOROOT=$HOME/Code/GO/ROOT/
 # stable version of go 
 # export GOROOT=$HOME/Bin/golang/go
 # add this for test go build go from source
-# export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
+export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
 export GOPATH=$HOME/Code/GO/PATH/
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
@@ -21,6 +21,8 @@ export WORKON_HOME=$HOME/Code/.envs
 export PROJECT_HOME=$HOME/Code/python/
 source /usr/local/bin/virtualenvwrapper.sh
 
+# protobuf bin 
+export PATH="$HOME/Bin/protobuf/bin:$PATH"
 
 # History config
 export HISTCONTROL=erasedups

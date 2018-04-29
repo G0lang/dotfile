@@ -64,6 +64,8 @@ Plug 'mbbill/undotree'
 Plug 'othree/html5.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'vimlab/split-term.vim'
+Plug 'uarun/vim-protobuf'
+Plug 'kien/ctrlp.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
