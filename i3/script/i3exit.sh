@@ -2,7 +2,7 @@
 
 case "$1" in
     lock)
-        i3lock -c 000000
+        bash /home/sadegh/dotfile/i3/script/lock_and_blur.sh
         ;;
     logout)
         i3-msg exit
@@ -14,10 +14,10 @@ case "$1" in
 	systemctl hibernate
         ;;
     reboot)
-        sudo reboot
+        reboot
         ;;
     shutdown)
-        sudo poweroff
+        shutdown now
         ;;
     *)
         echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"

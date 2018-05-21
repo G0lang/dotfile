@@ -3,7 +3,7 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font pango: M+ 1m, FontAwesome, Ionicons, 10
+font pango: M+ 1m, FontAwesome, Ionicons, 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -17,6 +17,8 @@ bindsym $mod+Shift+q kill
 # Rofi
 bindsym $mod+d exec --no-startup-id rofi -show run -matching glob -separator-style "none" -font "Ubuntu Mono Regular 8" -hide-scrollbar -lines 10 -auto-select -bw 1 -width 40 
 
+#nm 
+exec --no-startup-id nm-applet
 
 # change focus
 bindsym $mod+j focus left
@@ -107,7 +109,8 @@ set $workspace4 ""
 set $workspace5 ""
 set $workspace6 ""
 set $workspace7 ""
-
+set $workspace8 ""
+set $workspace9 ""
 set $workspace0 ""
 
 # switch to workspace
@@ -156,7 +159,7 @@ bar {
 ##
 # system
 ##
-set $System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+Q) shutdown
 mode "$System" {
         bindsym l exec ~/.config/i3/script/i3exit.sh lock, mode "default"
         bindsym e exec ~/.config/i3/script/i3exit.sh logout, mode "default"
@@ -215,15 +218,15 @@ bindsym $mod+Shift+M mode "$Mount"
 # exec i3-msg 'workspace 1: web; exec google-chrome'
 
 #background image
-exec --no-startup-id feh --no-xinerama --bg-scale /home/sadegh/dotfile/background/bg.jpg
+exec --no-startup-id feh --no-xinerama --bg-scale /home/sadegh/dotfile/background/bg1.png
  
 # Screenshot
 bindsym 0xff61 exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym $mod+p exec scrot  ~/screenshot_%Y_%m_%d_%H_%M_%S.png
  
 #screen brightness 
-bindsym XF86MonBrightnessDown exec --no-startup-id "~/.config/i3/script/brightness_down.sh"
-bindsym XF86MonBrightnessUp exec --no-startup-id "~/.config/i3/script/brightness_up.sh"
+# bindsym XF86MonBrightnessDown exec --no-startup-id "~/.config/i3/script/brightness_down.sh"
+# bindsym XF86MonBrightnessUp exec --no-startup-id "~/.config/i3/script/brightness_up.sh"
 
 
 #kebyboard LED  brightness 
@@ -236,18 +239,37 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-mute $sink 0; 
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-mute $sink 0; pactl set-sink-volume $sink -2% "
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $sink toggle "
 
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+#clipmenu
+bindsym $mod+c exec /home/sadegh/dotfile/clipmenu/clipmenu.sh
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 # open new shell from current dir 
 bindsym $mod+b exec ~/.config/i3/script/shell.sh
 
 # bind software
 bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec urxvt -e tmux
-bindsym $mod+t exec /home/sadegh/Bin/telegram/Telegram/Telegram
+bindsym $mod+t exec telegram-desktop
 bindsym $mod+x exec urxvt -e ranger
 bindsym $mod+o exec libreoffice
-bindsym $mod+m exec exec urxvt -e vim
-bindsym $mod+i exec iceweasel
-bindsym $mod+c exec google-chrome
+bindsym $mod+m exec exec urxvt -e nvim
+bindsym $mod+z exec chromium
 # bindsym $mod+t exec urxvt -e htop
 #bindsym $mod+d exec meld
 #bindsym $mod+f exec filezilla
+
+#run i3lock at startup
+exec --no-startup-id "~/.config/i3/script/lock_and_blur.sh first"
+

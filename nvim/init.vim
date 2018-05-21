@@ -20,14 +20,14 @@ autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 autocmd FileType py setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
 " install plug auto 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/bundle')
 Plug 'neomake/neomake'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -54,7 +54,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'pseewald/vim-anyfold'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ihacklog/HiCursorWords'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'stephpy/vim-yaml'
 Plug 'jlanzarotta/bufexplorer'
@@ -145,14 +144,20 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
+let g:go_auto_type_info = 1
+set updatetime=200
+let g:go_auto_sameids = 1
+
 " vim-go mappings
-autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
-autocmd FileType go nmap <buffer> <leader>b <plug>(go-build)
-autocmd FileType go nmap <buffer> <leader>t <plug>(go-test)
-autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
-autocmd FileType go nmap <buffer> <leader>c <plug>(go-coverage)
-autocmd FileType go nmap <buffer> gd <plug>(go-def-split)
-autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
+autocmd FileType go nmap <buffer><leader>r  <plug>(go-run)
+autocmd FileType go nmap <buffer><leader>b  <plug>(go-build)
+autocmd FileType go nmap <buffer><leader>t  <plug>(go-test)
+autocmd FileType go nmap <buffer><leader>e  <plug>(go-rename)
+autocmd FileType go nmap <buffer><leader>c  <plug>(go-coverage-toggle)
+autocmd FileType go nmap <buffer>	 gd <plug>(go-def-split)
+autocmd FileType go nmap <buffer><leader>i  <plug>(go-info)
+autocmd FileType go nmap <buffer><Leader>gh <Plug>(go-doc)
+autocmd FileType go nmap <buffer><Leader>gv <Plug>(go-doc-vertical)
 
 " undotree 
 nnoremap <F5> :UndotreeToggle<cr>
@@ -182,12 +187,11 @@ let g:loaded_matchparen = 1
 " startup with number
 set number
 
-" cursor word
-let g:HiCursorWords_delay = 900
-
 " fold
 filetype plugin indent on
 let anyfold_fold_comments=1
+let anyfold_identify_comments=2
+let anyfold_comments = ["//"]
 syntax on
 let anyfold_activate=0
 set foldlevel=0
@@ -233,5 +237,5 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " python
-let g:python_host_prog = '/usr/bin/python'
+let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'

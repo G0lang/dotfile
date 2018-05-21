@@ -1,71 +1,99 @@
 # -*- coding: utf-8 -*-
 """
-Display if a connection to the internet is established.
+Determine if you have an Internet Connection.
+Configuration parameters:
+    cache_timeout: refresh interval for this module (default 10)
+    format: display format for this module (default '{icon}')
+    icon_off: show when connection is offline (default '■')
+    icon_on: show when connection is online (default '●')
+    timeout: time to wait for a response, in seconds (default 2)
+    url: specify URL to connect when checking for a connection
+        (default 'http://www.google.com')
+Format placeholders:
+    {icon} connection status
+Color options:
+    color_off: Connection offline, defaults to color_bad
+    color_on: Connection online, defaults to color_good
+@author obb
+SAMPLE OUTPUT
+{'color': '#00FF00', 'full_text': u'\u25cf'}
+off
+{'color': '#FF0000', 'full_text': u'\u25a0'}
 """
 
-from subprocess import check_output
-from time import time
-import shlex
-import re
 try:
     # python3
     from urllib.request import urlopen
 except:
+    # python2
     from urllib2 import urlopen
 
 
 class Py3status:
+    """
+    """
     # available configuration parameters
     cache_timeout = 10
-    format_offline = '■'
-    format_online = '●'
-    format_online_vpn = '▼'
-    # format_online_vpn = '◉'
+    format = '{icon}'
+    icon_off = u'■'
+    icon_on = u'●'
     timeout = 2
     url = 'http://www.google.com'
 
-    def _check_vpn(self):
-        out = check_output(shlex.split("/sbin/ifconfig")).decode("utf-8")
-        kvre = re.compile(r"^kvnet.*", flags=re.DOTALL)
-        return re.match(kvre, out)
-
-    def _connection_present(self):
-        try:
-            urlopen(self.url, timeout=self.timeout)
-        except:
-            return False
-        else:
-            return True
-
-    def connection_status(self, i3s_output_list, i3s_config):
-        response = {
-            'cached_until': time() + self.cache_timeout
+    class Meta:
+        deprecated = {
+            'rename': [
+                {
+                    'param': 'format_online',
+                    'new': 'icon_on',
+                    'msg': 'obsolete parameter use `icon_on`',
+                },
+                {
+                    'param': 'format_offline',
+                    'new': 'icon_off',
+                    'msg': 'obsolete parameter use `icon_off`',
+                },
+            ],
         }
 
-        connected = self._connection_present()
-        if connected:
-            response['full_text'] = self.format_online
-            response['color'] = i3s_config['color_good']
-            if self._check_vpn():
-                response['full_text'] = self.format_online_vpn
-                response['color'] = i3s_config['color_degraded']
-        else:
-            response['full_text'] = self.format_offline
-            response['color'] = i3s_config['color_bad']
+    def post_config_hook(self):
+        self.color_on = self.py3.COLOR_ON or self.py3.COLOR_GOOD
+        self.color_off = self.py3.COLOR_OFF or self.py3.COLOR_BAD
+        self.ping_command = [
+            'ping', '-c', '1', '-W', '%s' % self.timeout, self.url]
 
-        return response
+    def _connection_present(self):
+        if '://' in self.url:
+            try:
+                urlopen(self.url, timeout=self.timeout)
+                return True
+            except:
+                return False
+        else:
+            try:
+                self.py3.command_output(self.ping_command)
+                return True
+            except:
+                return False
+
+    def online_status(self):
+        if self._connection_present():
+            icon = self.icon_on
+            color = self.color_on
+        else:
+            color = self.color_off
+            icon = self.icon_off
+
+        return {
+            'cached_until': self.py3.time_in(self.cache_timeout),
+            'full_text': self.py3.safe_format(self.format, {'icon': icon}),
+            'color': color
+        }
 
 
 if __name__ == "__main__":
     """
-    Test this module by calling it directly.
+    Run module in test mode.
     """
-    from time import sleep
-    x = Py3status()
-    config = {
-        'color_good': '#00FF00',
-        'color_bad': '#FF0000',
-    }
-    while True:
-        print(x.connection_status([], config))
-        sleep(1)
+    from py3status.module_test import module_test
+    module_test(Py3status)
