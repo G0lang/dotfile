@@ -247,7 +247,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 #clipmenu
-bindsym $mod+c exec /home/sadegh/dotfile/clipmenu/clipmenu.sh
+bindsym $mod+c exec  /home/sadegh/dotfile/clipmenu/clipmenu.sh
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -256,7 +256,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # open new shell from current dir 
-bindsym $mod+b exec ~/.config/i3/script/shell.sh
+bindsym $mod+b exec --no-startup-id ~/.config/i3/script/shell.sh
 
 # bind software
 bindsym $mod+Return exec urxvt

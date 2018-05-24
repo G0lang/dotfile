@@ -8,9 +8,9 @@ declare -A last_data
 while sleep 1; do
     for selection in clipboard primary; do
         if type -p xsel >/dev/null 2>&1; then
-            data=$(xsel --"$selection"; printf x)
-        else
-            data=$(xclip -o -sel "$selection"; printf x)
+            data=$(xclip -o -selection "$selection"; printf x)
+        # else
+        #    data=$(xsel --"$selection"; printf x)
         fi
 
         data=${data%x}

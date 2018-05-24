@@ -32,10 +32,10 @@ Plug 'neomake/neomake'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'zchee/deoplete-jedi'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jreybert/vimagit'
@@ -43,7 +43,6 @@ Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'mhartington/oceanic-next'
 Plug 'mhinz/vim-signify'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
@@ -54,17 +53,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'pseewald/vim-anyfold'
 Plug 'jiangmiao/auto-pairs'
+Plug 'godlygeek/tabular'
+Plug 'mbbill/undotree'
+
+Plug 'pangloss/vim-javascript'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'stephpy/vim-yaml'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'mbbill/undotree'
 Plug 'othree/html5.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'vimlab/split-term.vim'
 Plug 'uarun/vim-protobuf'
+Plug 'vim-scripts/JSON.vim'
+
+Plug 'vimlab/split-term.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -77,26 +80,26 @@ autocmd VimEnter *
 
 " deoplete
 set completeopt=longest,menuone " auto complete setting
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#keyword_patterns = {}
+let g:deoplete#enable_at_startup           = 1
+let g:deoplete#enable_smart_case           = 1
+let g:deoplete#auto_complete_start_length  = 1
+let g:deoplete#keyword_patterns            = {}
 let g:deoplete#keyword_patterns['default'] = '\h\w*'
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#align_class = 1
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode' " must install go get -u github.com/nsf/gocode
+let g:deoplete#omni#input_patterns         = {}
+let g:deoplete#sources#go#sort_class       = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#align_class      = 1
+let g:deoplete#sources#go#gocode_binary    = $GOPATH.'/bin/gocode' " must install go get -u github.com/nsf/gocode
 imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
 
 " neomake
 autocmd BufWritePost * Neomake
-let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
-let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
-let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+let g:neomake_error_sign            = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign          = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign          = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_info_sign             = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+let g:neomake_go_enabled_makers     = [ 'go', 'gometalinter' ]
 let g:neomake_go_gometalinter_maker = {
   \ 'args': [
   \   '--tests',
@@ -160,24 +163,27 @@ autocmd FileType go nmap <buffer><Leader>gh <Plug>(go-doc)
 autocmd FileType go nmap <buffer><Leader>gv <Plug>(go-doc-vertical)
 
 " undotree 
-nnoremap <F5> :UndotreeToggle<cr>
+nmap <C-U> :UndotreeToggle<CR>
+
+" tagbar
+nmap <C-T> :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_width = 25
 
 " nerdtree
 nmap <C-n> :NERDTreeTabsToggle<CR>
-let g:NERDTreeWinPos = "right"
-let NERDTreeMinimalUI = 1
-let NERDTreeIgnore=['\~$', '\.pyc$', '^\.DS_Store$', '^node_modules$', '.ropeproject', '__pycache__']
-let NERDTreeDirArrows = 1
+let g:NERDTreeWinPos         = "right"
+let NERDTreeMinimalUI        = 1
+let NERDTreeIgnore           = ['\~$', '\.pyc$', '^\.DS_Store$', '.ropeproject', '__pycache__']
+let NERDTreeDirArrows        = 1
 let NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize        = 25
 autocmd VimEnter * if argc() == 0 | NERDTree | endif
 " Auto close if NERDTree is the last thing open
 autocmd bufenter *
    \ if (winnr("$") == 1 && exists("b:NERDTree")
    \ && b:NERDTree.isTabTree()) | q | endif
-
 set laststatus=2
-
 let g:nerdtree_tabs_open_on_console_startup = 1
 
 " copy to clipboard
@@ -198,12 +204,7 @@ set foldlevel=0
 
 " Aireline theme
 let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
-
-" tagbar
-nmap <C-T> :TagbarToggle<CR>
-let g:tagbar_left = 1
-let g:tagbar_width = 25
+let g:airline_theme           = 'oceanicnext'
 
 " theme
 syntax enable
@@ -211,31 +212,19 @@ let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
 
-" fonts and devicons
-set encoding=utf8
-let g:webdevicons_enable = 0
-"let g:webdevicons_enable_nerdtree = 0
-"let g:webdevicons_enable_airline_statusline = 0
-
 " spell check
 setlocal spell spelllang=en_us
 set nospell
 
-" Translate Bye Google
-
 " Easymotion
-" <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
+nmap	     s <Plug>(easymotion-overwin-f2)
+map  <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
-" Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " python
-let g:python_host_prog = '/usr/bin/python2'
+let g:python_host_prog  = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
