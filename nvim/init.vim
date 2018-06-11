@@ -64,6 +64,7 @@ Plug 'othree/html5.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-scripts/JSON.vim'
+Plug 'nelsyeung/twig.vim'
 
 Plug 'vimlab/split-term.vim'
 Plug 'kien/ctrlp.vim'
@@ -88,7 +89,8 @@ let g:deoplete#keyword_patterns['default'] = '\h\w*'
 let g:deoplete#omni#input_patterns         = {}
 let g:deoplete#sources#go#sort_class       = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class      = 1
-let g:deoplete#sources#go#gocode_binary    = $GOPATH.'/bin/gocode' " must install go get -u github.com/nsf/gocode
+let g:deoplete#sources#go#gocode_binary    = $GOPATH.'/bin/gocode' 
+" must install go get -u github.com/nsf/gocode
 imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
@@ -228,3 +230,13 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " python
 let g:python_host_prog  = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
+
+" In insert or command mode, move normally by using Ctrl
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-l> <Right>
