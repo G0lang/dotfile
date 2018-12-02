@@ -21,6 +21,21 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+export TERM='xterm-256color'
+export TERM='linux'
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+# export VDPAU_DRIVER=va_gl
+
+# sudo loadkeys ~/dotfile/macbook/xkb/keymap/macbook78
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
 # if [[ "$(tty)" == '/dev/tty1' ]]; then
 # exec startx
 # fi
+
+

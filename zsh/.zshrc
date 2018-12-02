@@ -1,8 +1,11 @@
+#add bash profile 
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+
 # Path to your oh-my-zsh installation.
 export ZSH=/home/sadegh/.oh-my-zsh
 
 # Path to gcloud 
-source '/home/sadegh/Bin/google-cloud-sdk/path.zsh.inc'
+# source '/home/sadegh/Bin/google-cloud-sdk/path.zsh.inc'
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/

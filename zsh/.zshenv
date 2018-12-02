@@ -14,15 +14,15 @@ export GOPATH=$HOME/Code/GO/PATH/
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 #
-export PATH="$HOME/Bin/neovim/bin:$PATH"
+# export PATH="$HOME/Bin/neovim/bin:$PATH"
 
 # python virtualenvwrapper
-export WORKON_HOME=$HOME/Code/.envs
-export PROJECT_HOME=$HOME/Code/python/
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/Code/.envs
+# export PROJECT_HOME=$HOME/Code/python/
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # protobuf bin 
-export PATH="$HOME/Bin/protobuf/bin:$PATH"
+# export PATH="$HOME/Bin/protobuf/bin:$PATH"
 
 # History config
 export HISTCONTROL=erasedups

@@ -1,5 +1,5 @@
 ! █▓▒░ fonts
-urxvt*font: xft:DejaVu Sans Mono for Powerline:regular:size=11
+urxvt*font: xft:DejaVu Sans Mono for Powerline:regular:size=9
 
 URxvt.depth: 32
 URxvt.loginShell: true
