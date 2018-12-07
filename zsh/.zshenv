@@ -5,13 +5,15 @@ export ANDROID_HOME=$HOME/Android/Sdk
             
 # golang
 # work on go project 
-export GOROOT=$HOME/Code/GO/ROOT/
+# export GOROOT=$HOME/Code/GO/ROOT/
 # stable version of go 
 # export GOROOT=$HOME/Bin/golang/go
 # add this for test go build go from source
-export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
-export GOPATH=$HOME/Code/GO/PATH/
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# export GOROOT_BOOTSTRAP=$HOME/Bin/golang/go
+# export GOPATH=$HOME/Code/GO/PATH/
+# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH="$PATH:$HOME/go/bin"
+
 
 #
 # export PATH="$HOME/Bin/neovim/bin:$PATH"

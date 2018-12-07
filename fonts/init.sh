@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# yay -S fontconfig-infinality
+
 rm -rf /home/sadegh/.fonts
 
 cp -r /home/sadegh/dotfile/fonts /home/sadegh/.fonts

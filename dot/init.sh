@@ -6,3 +6,4 @@ ln -s $PWD/.Xdefaults $HOME/.Xdefaults
 ln -s $PWD/.xsession $HOME/.xsession 
 ln -s $PWD/.xinitrc $HOME/.xinitrc 
 ln -s $PWD/.Xresources $HOME/.Xresources
+ln -s $PWD/.bash_aliases $HOME/.bash_aliases

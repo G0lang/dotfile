@@ -3,7 +3,7 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font pango: M+ 1m, FontAwesome, Ionicons, 5
+font pango: M+ 1m, FontAwesome, Ionicons, 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -147,7 +147,7 @@ new_window 1pixel
 bar {
   position top
   status_command exec ~/dotfile/i3/bar
-  font pango: FontAwesome, Ionicons 4
+  font pango: FontAwesome, Ionicons 9
 }
 
 #bar {
@@ -278,3 +278,6 @@ bindsym $mod+z exec google-chrome-stable
 #run i3lock at startup
 exec --no-startup-id "~/.config/i3/script/lock_and_blur.sh first"
 
+# i3 chrome download explorer size 
+floating_minimum_size 150 x 150
+floating_maximum_size 150 x 150

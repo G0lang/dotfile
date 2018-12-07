@@ -60,7 +60,7 @@ URxvt.colorBD:  #d3d3d3
 URxvt.colorUL:  #528b8b
 
 
-URxvt.perl-lib: /home/sadegh/dotfile/urxvt/urxvt-perls/
+URxvt.perl-lib: /usr/lib/urxvt/perl
 ! █▓▒░ clipboard
 urxvt.perl-ext-common: default,clipboard,keyboard-select,font-size
 urxvt.keysym.M-Escape: perl:keyboard-select:activate

@@ -8,5 +8,16 @@
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export GDK_SCALE=2
 # export GDK_DPI_SCALE=0.5
+
+# Disable Caps Lock
+xmodmap -e "remove lock = Caps_Lock"
+setxkbmap -option ctrl:nocaps
+
+# Change language double shift
+setxkbmap -option grp:switch,grp:shifts_toggle,grp_led:scroll us,ir
+
+# macbook
+xkbcomp -I /home/sadegh/dotfile/macbook/kbd $DISPLA
+
 # Finally start i3wm
 exec i3
