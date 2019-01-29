@@ -1,25 +1,4 @@
-" /home/sadegh/.config/nvim/init.vim
-
-" Note Skip initialization for vim-tiny or vim-small.
-if 0 | endif
-if &compatible
-  set nocompatible
-endif
-
-let g:mapleader = ","
-
-" highligh 80 char
-if exists('+colorcolumn')
-  set colorcolumn=80
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
-" use real tabs in .go files, not spaces
-autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-autocmd FileType py setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-
-" install plug auto 
+" install plug auto
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -27,11 +6,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 " plugins
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.config/nvim/plugins')
 Plug 'neomake/neomake'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+" Plug 'jodosha/vim-godebug'
 Plug 'zchee/deoplete-jedi'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -45,9 +25,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'mhinz/vim-signify'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips'
 Plug 'fatih/molokai'
-Plug 'jodosha/vim-godebug'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -70,6 +48,16 @@ Plug 'vimlab/split-term.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'pearofducks/ansible-vim'
+
+Plug 'freitass/todo.txt-vim', { 'for': 'todo.txt' }
+Plug 'raimon49/requirements.txt.vim'
+
+
+Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -78,6 +66,24 @@ autocmd VimEnter *
   \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall
   \| endif
+
+" leader key
+let g:mapleader = ","
+" python
+let g:python_host_prog  = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
+" highligh 80 char
+set colorcolumn=80
+
+" use real tabs in .go files, not spaces
+autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType py setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+
+
+" not scroll
+set mouse=a
+set scrolloff=9999
 
 " deoplete
 set completeopt=longest,menuone " auto complete setting
@@ -89,11 +95,17 @@ let g:deoplete#keyword_patterns['default'] = '\h\w*'
 let g:deoplete#omni#input_patterns         = {}
 let g:deoplete#sources#go#sort_class       = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class      = 1
-let g:deoplete#sources#go#gocode_binary    = $GOPATH.'/bin/gocode' 
-" must install go get -u github.com/nsf/gocode
-imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
+let g:deoplete#sources#go#gocode_binary    = $GOPATH.'/bin/gocode'
+
+let g:AutoPairsMapCR=0
+
+map <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+
+
+
+
 
 " neomake
 autocmd BufWritePost * Neomake
@@ -152,6 +164,9 @@ let g:go_highlight_build_constraints = 1
 let g:go_auto_type_info = 1
 set updatetime=200
 let g:go_auto_sameids = 1
+let g:go_term_enabled = 1
+let g:go_term_mode = "split"
+let g:go_term_height = 13
 
 " vim-go mappings
 autocmd FileType go nmap <buffer><leader>r  <plug>(go-run)
@@ -173,7 +188,7 @@ let g:tagbar_left = 1
 let g:tagbar_width = 25
 
 " nerdtree
-nmap <C-n> :NERDTreeTabsToggle<CR>
+nmap <C-]> :NERDTreeTabsToggle<CR>
 let g:NERDTreeWinPos         = "right"
 let NERDTreeMinimalUI        = 1
 let NERDTreeIgnore           = ['\~$', '\.pyc$', '^\.DS_Store$', '.ropeproject', '__pycache__']
@@ -191,10 +206,9 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 " copy to clipboard
 noremap <C-c> "+y
 let g:loaded_matchparen = 1
-
 " startup with number
 set number
-
+set numberwidth=2
 " fold
 filetype plugin indent on
 let anyfold_fold_comments=1
@@ -203,16 +217,20 @@ let anyfold_comments = ["//"]
 syntax on
 let anyfold_activate=0
 set foldlevel=0
-
 " Aireline theme
 let g:airline_powerline_fonts = 1
 let g:airline_theme           = 'oceanicnext'
-
 " theme
 syntax enable
 let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
+
+"sets 
+set wildignore+=.*,.git,*.swp,*pyc,*pyo,*.png,*.jpg,*.gif,*.ai,*.jpeg,*.psd,*.jar,*.zip,*.gem,log/**,tmp/**,coverage/**,rdoc/**,output_*,*.xpi,doc/**
+
+set whichwrap+=<,>,h,l
+set fileformat=unix
 
 " spell check
 setlocal spell spelllang=en_us
@@ -226,10 +244,6 @@ map  <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" python
-let g:python_host_prog  = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
 
 " In insert or command mode, move normally by using Ctrl
 inoremap <C-h> <Left>

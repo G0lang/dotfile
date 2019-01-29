@@ -31,4 +31,6 @@ export HISTCONTROL=erasedups
 export HISTIGNORE="history*:ls*"
 export HISTTIMEFORMAT="%h %d %H:%M:%S >> "
 
-# export PATH="/home/sadegh/bin:/usr/local/bin:/home/xero/.gem/ruby/2.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+
+# Gem
+export PATH="$PATH:/usr/lib/ruby/gems/2.5.1/bin:$HOME/.gem/ruby/2.5.0/bin"

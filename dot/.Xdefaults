@@ -60,7 +60,7 @@ URxvt.colorBD:  #d3d3d3
 URxvt.colorUL:  #528b8b
 
 
-URxvt.perl-lib: /usr/lib/urxvt/perl
+# URxvt.perl-lib: /usr/lib/urxvt/perl
 ! █▓▒░ clipboard
 urxvt.perl-ext-common: default,clipboard,keyboard-select,font-size
 urxvt.keysym.M-Escape: perl:keyboard-select:activate
@@ -70,8 +70,13 @@ urxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 urxvt.clipboard.copycmd:  xsel -ib
 urxvt.clipboard.pastecmd: xsel -ob
 
-URxvt.keysym.C-0:   perl:font-size:increase
-URxvt.keysym.C-9: perl:font-size:decrease
+URxvt.keysym.C-minus:     resize-font:smaller
+URxvt.keysym.C-equal:      resize-font:bigger
+URxvt.keysym.C-plus:     resize-font:reset
+URxvt.keysym.C-question:  resize-font:show
+
+#URxvt.keysym.C-0:   perl:font-size:increase
+#URxvt.keysym.C-9: perl:font-size:decrease
 
 ! █▓▒░ misc
 urxvt.saveLines: 9999
